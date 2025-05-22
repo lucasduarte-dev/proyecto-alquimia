@@ -1,0 +1,120 @@
+{% extends 'TiendaAlquimia/base.html' %}
+{% load static %}
+{% block extra_js %}
+    <script src="{% static 'js/productos_relacionados.js' %}"></script>
+{% endblock %}
+{% block extra_css %}
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/detalle_productos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/barra-inicio.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    {% endblock %}
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">Alquimia De Almas</div>
+
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
+            <label for="menu-toggle" class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <div class="nav-content">
+                <ul class="nav-links">
+                    <li><a href="{% url 'inicio' %}">Inicio</a></li>
+                    <li><a href="{% url 'productos' %}">Productos</a></li>
+                    <li><a href="{% url 'cursos' %}">Cursos</a></li>
+                    <li><a href="{% url 'sobre_nosotras' %}">Sobre Nosotras</a></li>
+                </ul>
+                <div class="nav-actions">
+                    {% if user.is_authenticated %}
+                        <form method="post" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="button-outline">Cerrar Sesión</button>
+                        </form>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="button-outline">Iniciar Sesión</a>
+                    {% endif %}
+                    <a href="{% url 'carrito' %}" class="cart-button"><i class="fa fa-shopping-cart"></i></a>
+                </div>
+            </div>
+        </nav>
+    </header>
+{% block title %}Detalle del Producto - {{ producto.nombre }}{% endblock %}
+
+{% block content %}
+<section class="detalle-producto">
+    <div class="detalle-container">
+        <div class="imagen-container">
+            <div class="thumbnails">
+                <img class="thumbnail" src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" data-target="{{ producto.imagen.url }}">
+                {% if producto.imagen2 %}
+                <img class="thumbnail" src="{{ producto.imagen2.url }}" alt="{{ producto.nombre }} imagen 2" data-target="{{ producto.imagen2.url }}">
+                {% endif %}
+            </div>
+            <div class="main-image-container">
+                <img id="main-image" src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+            </div>
+        </div>
+        <div class="info-container">
+            <h1 class="producto-nombre">{{ producto.nombre }}</h1>
+            <p class="producto-descripcion">{{ producto.descripcion }}</p>
+            <div class="producto-precio">Precio: ${{ producto.precio_formateado }}</div>
+            <div class="producto-stock">Stock disponible: {{ producto.stock }}</div>
+        
+            
+                <div class="cantidad-container">
+                    <form method="post" action="{% url 'restar_del_carrito' producto_id=producto.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-cantidad" id="restar">-</button>
+                    </form>
+
+                    <span class="quantity">{{ cantidad }}</span>
+
+                    <form method="post" action="{% url 'sumar_item' producto.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-cantidad" id="sumar">+</button>
+                    </form>
+                </div>
+            
+                <form method="post" action="{% url 'agregar_al_carrito_redirect' producto.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-comprar">Agregar al carrito</button>
+                </form>
+            
+        </div>
+    </div>
+</section>
+
+<section class="productos-relacionados container">
+    <h2 class="productos-titulo ">Productos Relacionados</h2>
+    <div class="carrusel-container">
+        <div class="carrusel-track" id="carruselTrack">
+            {% for relacionado in productos_relacionados %}
+            <div class="carrusel-slide">
+                <div class="producto-card">
+                    <a href="{% url 'detalle_producto' relacionado.id %}">
+                        <div class="producto-imagen">
+                            <img src="{{ relacionado.imagen.url }}" alt="{{ relacionado.nombre }}">
+                        </div>
+                        <div class="producto-detalles">
+                            <h3>{{ relacionado.nombre }}</h3>
+                            <p>${{ relacionado.precio }}</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <button class="carrusel-control carrusel-prev" id="prevBtn">&#10094;</button>
+        <button class="carrusel-control carrusel-next" id="nextBtn">&#10095;</button>
+
+        <div class="carrusel-indicadores" id="indicadores"></div>
+    </div>
+</section>
+{% endblock %}
+

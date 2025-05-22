@@ -1,0 +1,53 @@
+{% extends 'TiendaAlquimia/index.html' %}
+
+
+{% load static %}
+{% block content %}
+
+  <link rel="stylesheet" href="{% static 'css/productos.css' %}">
+
+  
+
+ 
+  <section class="product-categories">
+    <div class="category-buttons">
+      <a href="/productos" class="category-btn">Todos</a>
+      <a href="/productos/oraculo" class="category-btn">Óráculos</a>
+      <a href="/productos/spray" class="category-btn">Sprays Áuricos</a>
+      <a href="{% url 'Jabones' %}" class="category-btn">Jabones</a>
+      <a href="{% url 'lista_meditaciones' %}" class="category-btn">Meditaciones</a>
+    </div>
+  </section>
+  
+ 
+<div class="productos-container">
+    <h1 class="productos-header">Jabones</h1>
+    <div class="productos-grid">
+      {% for producto in productos %}
+      <a href="{% url 'detalle_producto' producto.id %}" class="producto-card-link" style="text-decoration:none; color:inherit;">
+          <div class="producto-card">
+              <div class="producto-imagen">
+                  {% if producto.imagen %}
+                  <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="producto-img">
+                  {% endif %}
+              </div>
+              <div class="producto-info">
+                  <h3>{{ producto.nombre }}</h3>
+                  <p>{{ producto.descripcion }}</p>
+                  <p class="precio">${{ producto.precio_formateado }}</p>
+                  <div class="producto-acciones">
+                      <form method="post" action="{% url 'agregar_al_carrito' producto.id %}" style="display:inline;">
+                          {% csrf_token %}
+                          <button type="submit" class="producto-btn">
+                              <i class="fas fa-cart-plus"></i> Agregar
+                          </button>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </a>
+      {% endfor %}
+  </div>
+</div>
+</section>
+{% endblock %}

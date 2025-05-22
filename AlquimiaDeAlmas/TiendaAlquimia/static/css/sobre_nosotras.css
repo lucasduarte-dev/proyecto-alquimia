@@ -1,0 +1,73 @@
+body {
+    background-color: rgb(62, 18, 157) ;
+    background-image: none ;
+}
+.page-title {
+    background-image: none ;
+    background-color: rgba(240, 211, 240, 0.568) ;
+    padding-top: 110px; /* Aumentá este valor para simular espacio arriba */
+    padding-bottom: 60px;
+    text-align: center;
+    filter: none ;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(280px, 1fr));
+    gap: 1rem;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0; /* quito padding */
+    justify-content: center; /* centrar columnas */
+}
+
+.team-member {
+    width: 100%;
+    background-color: rgba(240, 211, 240, 0.568);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+}
+.team-member::before {
+    background: none ;
+    opacity: 0 ;
+}
+
+.team-member:hover {
+    background-color: #fefeff ;
+}
+
+.member-image {
+    background: none ;
+}
+
+.team-member h3 {
+    color: #6a1b9a ;
+}
+
+.team-member li {
+    color: #333 ;
+}
+
+/* Pantallas medianas: tablets, laptops */
+@media (max-width: 1024px) {
+    .team-grid {
+        grid-template-columns: repeat(2, minmax(280px, 1fr));
+    }
+}
+
+/* Pantallas pequeñas: móviles grandes */
+@media (max-width: 768px) {
+    .team-grid {
+        grid-template-columns: 1fr;
+        padding: 0 1rem; /* algo de padding lateral para no pegarse al borde */
+    }
+}

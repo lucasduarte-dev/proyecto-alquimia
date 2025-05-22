@@ -1,0 +1,269 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+.header-container {
+    width: 100%;
+    background: #ffffff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: center;
+}
+
+.header-content {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    margin: 0 auto;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: rgba(255, 255, 255, 0.95);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-sizing: border-box;
+  font-family: 'Raleway', sans-serif !important;
+}
+  .navbar .logo {
+    font-size: 1.5rem;
+    font-family: 'Cinzel', serif !important;
+    color: rgb(156,132,205);
+    z-index: 1001;
+  }
+  
+/* Nuevos estilos para el menú responsive */
+.menu-toggle {
+    display: none; /* Oculta el checkbox */
+}
+
+.hamburger {
+  display: none;
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem; /* Ajustá este valor para moverlo más a la derecha o izquierda */
+  z-index: 1001;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px 0;
+    background-color: rgb(156,132,205);
+    transition: all 0.3s ease;
+    
+}
+
+.nav-content {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #32394c;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: rgb(156,132,205);
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Estilos para móviles */
+@media (max-width: 768px) {
+    .hamburger {
+        display: block; /* Muestra el botón hamburguesa */
+    }
+    .navbar {
+      left: 10px;
+      width: calc(100% - 20px);
+  }
+    
+    .nav-content {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 55%;
+        height: 100vh;
+        background-color: rgba(255, 255, 255, 0.98);
+        flex-direction: column;
+        justify-content: center;
+        gap: 2rem;
+        transition: all 0.5s ease;
+        z-index: 1000;
+        padding-top: 80px;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    }
+    
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+    
+    .nav-actions {
+        flex-direction: column;
+    }
+    
+    /* Cuando el menú está abierto (checkbox marcado) */
+    .menu-toggle:checked ~ .nav-content {
+        left: 0;
+    }
+    
+    /* Transforma el icono hamburguesa en una X */
+    .menu-toggle:checked ~ .hamburger span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .menu-toggle:checked ~ .hamburger span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .menu-toggle:checked ~ .hamburger span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+    
+    /* Overlay para cerrar el menú al hacer clic fuera */
+    .menu-toggle:checked ~ .nav-content::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 30%;
+        height: 100%;
+        background-color: transparent;
+        z-index: -1;
+    }
+}
+
+
+  
+  .button-outline {
+    border: 2px solid rgb(156,132,205);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    color: rgb(156,132,205);
+    transition: all 0.3s ease;
+  }
+  
+  .button-outline:hover {
+    background-color: rgb(156,132,205);
+    color: white;
+  }
+  
+  .cart-button {
+    font-size: 1.2rem;
+    color: #4c3a32;
+  }
+  
+
+
+
+.header-hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+.video-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2; /* Cambiado de -2 a 0 para evitar problemas de visibilidad */
+}
+
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+   
+
+    z-index: -1;
+
+}
+
+.hero-text {
+    color: white; /* Asegurar que el texto sea visible */
+    max-width: 900px;
+    padding: 2rem;
+    z-index: 2; /* Asegurar que esté por encima del video y el overlay */
+    position: relative;
+}
+
+.hero-text h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 5rem;
+    color: rgb(255, 255, 255);
+    margin-bottom: 1.5rem;
+}
+
+/* Ajustar responsividad */
+@media (max-width: 768px) {
+    .video-bg {
+        height: 100%; /* Asegurar que cubra todo el contenedor en móviles */
+    }
+}
+
+
+
+.button-primary {
+    background-color: transparent;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 20px;
+    border: 2px solid white;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+}
+
+.button-primary:hover {
+    background-color: rgb(156,132,205);
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .hero-text h1 {
+        font-size: 2.5rem;
+        padding: 0 1rem;
+    }
+
+    .button-primary {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .hero-text {
+        padding: 1rem;
+    }
+
+    .header-hero {
+        height: 80vh; /* más corto en pantallas chicas */
+    }
+}

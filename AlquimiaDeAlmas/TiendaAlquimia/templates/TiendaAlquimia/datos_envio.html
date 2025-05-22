@@ -1,0 +1,187 @@
+{% extends 'TiendaAlquimia/base.html' %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/barra-inicio.css' %}">
+<link rel="stylesheet" href="{% static 'css/finalizar_compra.css' %}">
+<style>
+    .shipping-form {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #333;
+    }
+    
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+    
+    .btn-submit {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+    
+    .btn-submit:hover {
+        background-color: #45a049;
+    }
+    
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: -10px;
+        margin-left: -10px;
+    }
+    
+    .form-col {
+        flex: 0 0 50%;
+        max-width: 50%;
+        padding: 0 10px;
+    }
+    
+    @media (max-width: 768px) {
+        .form-col {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+    }
+    
+    .product-summary {
+        margin-bottom: 30px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Datos de Envío</h2>
+    
+    <div class="product-summary">
+        <h3>Resumen de tu Compra</h3>
+        <p class="total">Total a pagar: ${{ total_formateado }}</p>
+    </div>
+    
+    <form class="shipping-form" method="post" action="{% url 'compra_exitosa' %}">
+        {% csrf_token %}
+        
+        <div class="form-row">
+            <div class="form-col">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" name="nombre" id="nombre" class="form-control" required value="{{ request.user.first_name }}">
+                </div>
+            </div>
+            <div class="form-col">
+                <div class="form-group">
+                    <label for="apellido">Apellido</label>
+                    <input type="text" name="apellido" id="apellido" class="form-control" required value="{{ request.user.last_name }}">
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-col">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" class="form-control" required value="{{ request.user.email }}">
+                </div>
+            </div>
+            <div class="form-col">
+                <div class="form-group">
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" name="telefono" id="telefono" class="form-control" required>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="empresa">Empresa (opcional)</label>
+            <input type="text" name="empresa" id="empresa" class="form-control">
+        </div>
+        
+        <div class="form-group">
+            <label for="direccion">Dirección</label>
+            <input type="text" name="direccion" id="direccion" class="form-control" required>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-col">
+                <div class="form-group">
+                    <label for="ciudad">Ciudad</label>
+                    <input type="text" name="ciudad" id="ciudad" class="form-control" required>
+                </div>
+            </div>
+            <div class="form-col">
+                <div class="form-group">
+                    <label for="provincia">Provincia</label>
+                    <select name="provincia" id="provincia" class="form-control" required>
+                        <option value="">Seleccionar...</option>
+                        <option value="Buenos Aires">Buenos Aires</option>
+                        <option value="CABA">Ciudad de Buenos Aires</option>
+                        <option value="Catamarca">Catamarca</option>
+                        <option value="Chaco">Chaco</option>
+                        <option value="Chubut">Chubut</option>
+                        <option value="Córdoba">Córdoba</option>
+                        <option value="Corrientes">Corrientes</option>
+                        <option value="Entre Ríos">Entre Ríos</option>
+                        <option value="Formosa">Formosa</option>
+                        <option value="Jujuy">Jujuy</option>
+                        <option value="La Pampa">La Pampa</option>
+                        <option value="La Rioja">La Rioja</option>
+                        <option value="Mendoza">Mendoza</option>
+                        <option value="Misiones">Misiones</option>
+                        <option value="Neuquén">Neuquén</option>
+                        <option value="Río Negro">Río Negro</option>
+                        <option value="Salta">Salta</option>
+                        <option value="San Juan">San Juan</option>
+                        <option value="San Luis">San Luis</option>
+                        <option value="Santa Cruz">Santa Cruz</option>
+                        <option value="Santa Fe">Santa Fe</option>
+                        <option value="Santiago del Estero">Santiago del Estero</option>
+                        <option value="Tierra del Fuego">Tierra del Fuego</option>
+                        <option value="Tucumán">Tucumán</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="codigo_postal">Código Postal</label>
+            <input type="text" name="codigo_postal" id="codigo_postal" class="form-control" required>
+        </div>
+        
+        <div class="form-group">
+            <button type="submit" class="btn-submit">Confirmar Envío y Finalizar Compra</button>
+        </div>
+    </form>
+    
+    <div class="action-buttons">
+        <a href="{% url 'carrito' %}" class="action-btn secondary">
+            <i class="fas fa-arrow-left"></i> Volver al Carrito
+        </a>
+    </div>
+</div>
+{% endblock %}

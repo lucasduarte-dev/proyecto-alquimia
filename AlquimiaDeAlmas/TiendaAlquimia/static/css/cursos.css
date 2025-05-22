@@ -1,0 +1,51 @@
+body {
+    background-color: rgb(62, 18, 157);
+    background-image: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.titulo-cursos {
+    background-image: none;
+    background-color: rgba(240, 211, 240, 0.568);
+    padding: 100px 20px 50px;
+    text-align: left;
+    filter: none;
+    transition: all 0.3s ease-in-out;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    margin-bottom: 0;
+    flex-grow: 1; /* Make .titulo-cursos fill the remaining space */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+}
+
+.titulo-cursos h2 {
+    color: #6a1b9a;
+    font-size: 2.5rem;
+    font-weight: 600;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+    animation: fadeInDown 1s ease-out both;
+}
+
+.titulo-cursos p.proximamente {
+    color: #3d1b7ccc;
+    font-size: 3rem;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 0;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    font-style: italic;
+    animation: fadeInUp 1s ease-out both;
+}
+

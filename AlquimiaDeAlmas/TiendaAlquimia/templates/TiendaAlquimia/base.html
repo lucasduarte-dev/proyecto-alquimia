@@ -1,0 +1,211 @@
+{% load static %}
+<!DOCTYPE html>
+{% block extra_js %}
+    <script src="{% static 'js/testimonios.js' %}"></script>
+{% endblock %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block extra_css %}
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/barra-inicio.css' %}">
+    <link rel="stylesheet" href="{% static 'css/testimonios.css' %}">
+    <link rel="stylesheet" href="{% static 'css/carrito.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    {% endblock %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">Alquimia De Almas</div>
+            
+            <!-- Añade este input y label para el menú hamburguesa -->
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
+            <label for="menu-toggle" class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+            
+            <!-- Envuelve estos elementos en un div contenedor -->
+            <div class="nav-content">
+                <ul class="nav-links">
+                    <li><a href="{% url 'inicio' %}">Inicio</a></li>
+                    <li><a href="{% url 'productos' %}">Productos</a></li>
+                    <li><a href="{% url 'cursos' %}">Cursos</a></li>
+                    <li><a href="{% url 'sobre_nosotras' %}">Sobre Nosotras</a></li>
+                </ul>
+                <div class="nav-actions">
+                    {% if user.is_authenticated %}
+                        <form method="post" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="button-outline">Cerrar Sesión</button>
+                        </form>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="button-outline">Iniciar Sesión</a>
+                    {% endif %}
+                    <a href="{% url 'carrito'%}" class="cart-button"><i class="fa fa-shopping-cart"></i></a>
+                </div>
+            </div>
+        </nav>
+    </header>
+   
+    {% if request.path == '/' %}
+        <section class="header-hero">
+            <video autoplay loop muted playsinline class="video-bg">
+                <source src="{% static 'css/videos/fondoheader.mp4' %}" type="video/mp4">
+                Tu navegador no soporta videos HTML5.
+            </video>
+            <div class="overlay"></div>
+            <div class="hero-text">
+                <h1>Alquimia De Almas</h1>
+                <a href="{% url 'sobre_nosotras' %}" class="button-primary">¡Conocenos!</a>
+            </div>
+        </section>
+    {% endif %}
+
+    {% block content %}
+    <section id="acerca" class="section about">
+        <h2>Acerca de Nosotras</h2>
+        <div class="about-content">
+            <div class="about-card">
+                <div class="about-logo">
+                    <img src="{% static 'css/imagenes/6.jpg' %}" alt="Logo" class="logo-about">
+                </div>
+                <div class="about-text">
+                    <p>
+                        Somos un equipo que busca acompañarte en tu proceso de transformación espiritual para descubrir tu esencia humana sanando tus heridas emocionales.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section eventos">
+        <h2>Eventos</h2>
+        <div class="card-grid">
+            <div class="card">
+                <img src="{% static 'css/imagenes/talleres.jpg' %}" alt="Talleres Vivenciales">
+                <h3>Talleres Vivenciales</h3>
+            </div>
+            <div class="card">
+                <img src="{% static 'css/imagenes/constelaciones.jpg' %}" alt="Constelaciones">
+                <h3>Constelaciones Grupales</h3>
+            </div>
+            <div class="card">
+                <img src="{% static 'css/imagenes/charlas.jpg' %}" alt="Charlas">
+                <h3>Charlas Conscientes</h3>
+            </div>
+        </div>
+    </section>
+
+    <section class="section productos">
+        <h2>Nuestros Productos</h2>
+        <div class="card-grid">
+            <div class="card">
+                <img src="{% static 'css/imagenes/meditaciones2.jpeg' %}" alt="Meditaciones">
+                <h3>Meditaciones Guiadas</h3>
+                <ul>
+                    <li>Protección con el Arcángel Miguel</li>
+                    <li>Limpieza con Zadquiel</li>
+                    <li>Conexión con el alma</li>
+                    <li>Manifestación</li>
+                </ul>
+            </div>
+            <div class="card">
+                <img src="{% static 'css/imagenes/oraculos2.jpeg' %}" alt="Oráculos">
+                <h3>Oráculos Angélicos</h3>
+                <p>Símbolos De Sanación</p>
+            </div>
+            <div class="card">
+                <img src="{% static 'css/imagenes/jabones2.jpeg' %}" alt="Jabones">
+                <h3>Jabones Esotéricos</h3>
+                <p>Limpieza energética</p>
+                <p>Amor Propio</p>
+                <p>Conexión</p>
+            </div>
+            <div class="card">
+                <img src="{% static 'css/imagenes/logoejempo.jpeg' %}" alt="Sprays áuricos">
+                <h3>Sprays Áuricos</h3>
+                <ul>
+                    <li>Armonización del aura</li>
+                    <li>Atraer buenas energías</li>
+                    <li>Alejar entidades</li>
+                    <li>Relajación</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <section class="testimonios-carousel container">
+        <h2 class="testimonios-titulo">Testimonios</h2>
+      
+        <div class="carrusel-container">
+          <div class="carrusel-track" id="carruselTrack">
+            {% for testimonio in testimonios %}
+              <div class="carrusel-slide">
+                <div class="testimonio-card">
+                  <div class="testimonio-contenido">
+                    “{{ testimonio.mensaje }}”
+                  </div>
+                  <div class="testimonio-autor">
+                    <div class="testimonio-avatar">
+                      {{ testimonio.nombre|slice:":1" }}
+                    </div>
+                    {{ testimonio.nombre }}
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+      
+          <!-- Controles -->
+          <button class="carrusel-control carrusel-prev" id="prevBtn">&#10094;</button>
+          <button class="carrusel-control carrusel-next" id="nextBtn">&#10095;</button>
+      
+          <!-- Indicadores -->
+          <div class="carrusel-indicadores" id="indicadores"></div>
+        </div>
+      </section>
+    {%endblock%}
+    
+    {% block footer %}
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>Alquimia de Almas</h3>
+                <p>Conectando tu esencia con el universo interior ✨</p>
+            </div>
+            <div class="footer-links">
+                <h4>Explorá</h4>
+                <ul>
+                    <li><a href="{% url 'inicio' %}">Inicio</a></li>
+                    <li><a href="{% url 'productos' %}">Productos</a></li>
+                    <li><a href="{% url 'cursos' %}">Cursos</a></li>
+                    <li><a href="{% url 'sobre_nosotras' %}">Sobre Nosotras</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contacto</h4>
+                <p><i class="fas fa-phone"></i> +54 9 123 456 789</p>
+                <p><i class="fas fa-envelope"></i> contacto@alquimiadealmas.com</p>
+            </div>
+            <div class="footer-redes">
+                <h4>Seguinos</h4>
+                <a href="https://instagram.com/tu_instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://facebook.com/tu_facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://wa.me/549123456789" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+        <div class="footer-copy">
+            <p>&copy; {{ now.year }} Alquimia de Almas - Todos los derechos reservados</p>
+        </div>
+    </footer>
+    {% endblock %}
+
+   
+    </body>
+</html>

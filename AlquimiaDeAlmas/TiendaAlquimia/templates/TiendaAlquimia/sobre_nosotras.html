@@ -1,0 +1,132 @@
+{% extends 'TiendaAlquimia/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/barra-inicio.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/sobre_nosotras.css' %}">
+<link rel="stylesheet" href="{% static 'css/footer.css' %}">
+
+
+
+{% endblock %}
+
+{% block content %}
+<main>
+    <section class="page-title">
+        <h1>SOBRE NOSOTRAS</h1>
+        <div class="title-decoration"></div>
+        <div class="team-grid">
+            {% for member in team_members %}
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="{% static 'css/imagenes/imagen' %}" alt="{{ member.name }}">
+                </div>
+                <h3>{{ member.name }}</h3>
+                <ul>
+                    {% for skill in member.skills %}
+                    <li>{{ skill }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% empty %}
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="{% static 'css/imagenes/Mercedes.jpg' %}" alt="María Mercedes Marquez">
+                </div>
+                <h3>María Mercedes Marquez</h3>
+                <ul>
+                    <li>Reikista</li>
+                    <li>Lectora de Registros Akáshicos</li>
+                    <li>Canalizadoras de mensajes de seres de Luz</li>
+                    <li>Medium</li>
+                    <li>Acompaño en sanaciones almicas y constelaciones familiares</li>
+                    <li><div class="footer-redes">
+                            <h4>Redes:</h4>
+                            <a href="https://www.instagram.com/mercedes4531/" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.youtube.com/@mercedesmarquez7795" target="_blank"><i class="fab fa-youtube"></i></a>
+                            <a href="https://facebook.com/tu_facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://t.me/meditacionalmica" target="_blank"><i class="fab fa-telegram"></i></a>
+                            <a href="https://www.tiktok.com/@mercedesmarquez176?_t=ZM-8wW65gv5VTR&_r=1" target="_blank"><i class="fab fa-tiktok"></i></a>
+                            <a href="https://wa.me/549123456789" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        </div></li>
+                </ul>
+            </div>
+
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="{% static 'css/imagenes/flor.jpg' %}" alt="Florencia Milagros Duarte">
+                </div>
+                <h3>Florencia Milagros Duarte</h3>
+                <ul>
+                    <li>Lectora de Registros Akáshicos</li>
+                    <li>Maestra Reiki Serafín</li>
+                    <li>Angeloterapia</li>
+                    <li>Conexión Almica</li>
+                    <li>Canalizadora</li>
+                    <li>Mediumnidad</li>
+                    <li>Limpieza Energetica de espacios y personas</li>
+                    <li><div class="footer-redes">
+                            <h4>redes</h4>
+                            <a href="https://www.instagram.com/florcita_duarte/" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://youtube.com/c/tu_canal" target="_blank"><i class="fab fa-youtube"></i></a>
+                            <a href="https://facebook.com/tu_facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://t.me/tu_telegram" target="_blank"><i class="fab fa-telegram"></i></a>
+                            <a href="https://tiktok.com/@tu_tiktok" target="_blank"><i class="fab fa-tiktok"></i></a>
+                            <a href="https://wa.me/549123456789" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        </div></li>
+                </ul>
+            </div>
+
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="{% static 'css/imagenes/Rocio.jpg' %}" alt="Rocío Cartasso">
+                </div>
+                <h3>Rocío Cartasso</h3>
+                <ul>
+                    <li>Maestra Reiki Usui</li>
+                    <li>Maestra de Registros Akáshicos</li>
+                    <li>Terapeuta floral</li>
+                    <li>Limpiezas psicobioenergéticas</li>
+                    <li>Tameana 1</li>
+                    <li>Acompaño en procesos de nutrición bioemocional</li>
+                    <li>Consteladora Familiar</li>
+                    <li><div class="footer-redes">
+                            <h4>redes</h4>
+                            <a href="https://www.instagram.com/rocio_cartasso/" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://youtube.com/c/tu_canal" target="_blank"><i class="fab fa-youtube"></i></a>
+                            <a href="https://facebook.com/tu_facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://t.me/tu_telegram" target="_blank"><i class="fab fa-telegram"></i></a>
+                            <a href="https://tiktok.com/@tu_tiktok" target="_blank"><i class="fab fa-tiktok"></i></a>
+                            <a href="https://wa.me/549123456789" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        </div></li>
+                </ul>
+            </div>
+
+            <div class="team-member">
+                <div class="member-image">
+                    <img src="{% static 'css/imagenes/valeria.jpg' %}" alt="Valeria soledad Fernández guichon">
+                </div>
+                <h3>Valeria soledad Fernández guichon</h3>
+                <ul>
+                    <li>Angeloterapeuta</li>
+                    <li>Lectora de registros akashicos angélicos</li>
+                    <li>Limpiezas energéticas de espacios</li>
+                    <li>Acompaño en procesos de sanación y en Constelaciones Familiares</li>
+                    <li><div class="footer-redes">
+                            <h4>redes</h4>
+                            <a href="https://www.instagram.com/valefernandezguichon/" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <a href="https://youtube.com/c/tu_canal" target="_blank"><i class="fab fa-youtube"></i></a>
+                            <a href="https://facebook.com/tu_facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://t.me/tu_telegram" target="_blank"><i class="fab fa-telegram"></i></a>
+                            <a href="https://tiktok.com/@tu_tiktok" target="_blank"><i class="fab fa-tiktok"></i></a>
+                            <a href="https://wa.me/549123456789" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        </div></li>
+                </ul>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+{% endblock %}

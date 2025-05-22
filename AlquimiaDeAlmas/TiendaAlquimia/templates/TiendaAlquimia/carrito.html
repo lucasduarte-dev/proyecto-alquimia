@@ -1,0 +1,81 @@
+
+{% extends 'TiendaAlquimia/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/barra-inicio.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/carrito.css' %}">
+<link rel="stylesheet" href="{% static 'css/footer.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="cart-container">
+    <div class="cart-header">
+        <h1 class="titulo-carrito">Tu Carrito</h1>
+    </div>
+    
+    {% if carrito %}
+        <div class="cart-items">
+            {% for producto_id, producto in carrito.items %}
+            <div class="cart-item">
+                <img src="{{ producto.imagen }}" alt="{{ producto.nombre }}" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">{{ producto.nombre }}</h3>
+                    <p class="product-description">{{ producto.descripcion }}</p>
+                    <p class="product-price">${{ producto.precio_formateado }}</p>
+                  
+                    <!-- Acciones alineadas a la derecha -->
+                    <div class="product-actions">
+                      <div class="quantity-control">
+                        <form method="post" action="{% url 'restar_del_carrito' producto_id=producto_id %}">
+                          {% csrf_token %}
+                          <button type="submit" class="qty-btn"><i class="fas fa-minus"></i></button>
+                        </form>
+                  
+                        <span class="quantity">{{ producto.cantidad }}</span>
+                  
+                        <form method="post" action="{% url 'agregar_al_carrito' producto_id=producto_id %}">
+                          {% csrf_token %}
+                          <button type="submit" class="qty-btn"><i class="fas fa-plus"></i></button>
+                        </form>
+                      </div>
+                  
+                      <form method="post" action="{% url 'eliminar_del_carrito' producto_id=producto_id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="remove-btn">
+                          <i class="fas fa-trash-alt"></i> Eliminar
+                        </button>
+                      </form>
+                    </div>
+                  
+                    <p class="subtotal">Subtotal: ${{ producto.subtotal_formateado }}</p>
+                  </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <p class="total">Total: ${{ total_formateado }}</p>
+
+        <div class="button-group">
+            <a href="{% url 'proceder_pago' %}" class="checkout-btn">
+                <i class="fas fa-credit-card"></i> Proceder al Pago
+            </a>
+
+            <a href="{% url 'productos' %}" class="continue-btn">
+                <i class="fas fa-arrow-left"></i> Seguir Comprando
+            </a>
+        </div>
+    {% else %}
+        <div class="empty-cart">
+            <i class="fas fa-shopping-cart fa-4x" style="color:black;"></i>
+            <h3 class="carritovacio">Tu carrito está vacío</h3>
+            <p>¡Explora nuestros productos y encuentra algo especial!</p>
+            <a href="{% url 'productos' %}" class="continue-btn">
+                <i class="fas fa-store"></i> Ir a la Tienda
+            </a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,138 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.testimonios-titulo {
+  text-align: center;
+  margin-bottom: 40px;
+  color: white;
+  font-size: 28px;
+  font-family: 'Cinzel', serif;
+}
+
+.carrusel-container {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.carrusel-track {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.carrusel-slide {
+  flex: 0 0 calc(33.333% - 20px);
+  min-width: calc(33.333% - 20px);
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.testimonio-card {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.testimonio-contenido {
+  font-style: italic;
+  line-height: 1.5;
+  margin-bottom: 15px;
+  color: black;
+  flex-grow: 1;
+}
+
+.testimonio-autor {
+  font-weight: bold;
+  color: purple;
+  display: flex;
+  align-items: center;
+  margin-top: auto;
+}
+
+.testimonio-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 12px;
+  background-color: rgb(156,132,205);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: purple;
+  font-weight: bold;
+}
+
+.carrusel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background-color: purple;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  z-index: 5;
+  border: none;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+
+.carrusel-control:hover {
+  opacity: 1;
+}
+
+.carrusel-prev {
+  left: 0px;
+}
+
+.carrusel-next {
+  right: 0px;
+}
+
+.carrusel-indicadores {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.indicador {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #ccc;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.indicador.active {
+  background-color: purple;
+}
+
+@media (max-width: 992px) {
+  .carrusel-slide {
+    flex: 0 0 calc(50% - 20px);
+    min-width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 576px) {
+  .carrusel-slide {
+    flex: 0 0 calc(100% - 20px);
+    min-width: calc(100% - 20px);
+  }
+}

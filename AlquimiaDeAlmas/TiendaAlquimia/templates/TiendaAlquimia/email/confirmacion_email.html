@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Activá tu cuenta</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7f4f0;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            background-color: #fff;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #5a3e36;
+            text-align: center;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            margin: 20px auto;
+            background-color: #a9746e;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #8b5a54;
+        }
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #aaa;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>¡Bienvenido/a, {{ usuario.username }}!</h2>
+        <p>Gracias por registrarte en <strong>Alquimia</strong>.</p>
+        <p>Para activar tu cuenta, hacé clic en el botón de abajo:</p>
+
+        <div style="text-align: center;">
+            <a href="{{ url_activacion }}" class="btn">Activar mi cuenta</a>
+        </div>
+
+        <p>Si vos no hiciste esta solicitud, podés ignorar este mensaje.</p>
+
+        <div class="footer">
+            &copy; {{ now|date:"Y" }} Alquimia de Almas — Todos los derechos reservados
+        </div>
+    </div>
+</body>
+</html>

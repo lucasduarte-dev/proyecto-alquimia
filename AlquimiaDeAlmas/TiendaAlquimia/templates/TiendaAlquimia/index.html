@@ -1,0 +1,52 @@
+{% extends 'TiendaAlquimia/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/productos.css' %}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/detalle_productos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/barra-inicio.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+
+<div class="main-content">
+    <section class="product-categories">
+        <div class="category-buttons">
+            <a href="{% url 'productos' %}" class="category-btn">TODOS</a>
+            <a href="{% url 'oraculos' %}" class="category-btn">ORÁCULOS</a>
+            <a href="{% url 'sprays' %}" class="category-btn">SPRAYS ÁURICOS</a>
+            <a href="{% url 'Jabones' %}" class="category-btn">JABONES</a>
+            <a href="{% url 'lista_meditaciones' %}" class="category-btn">Meditaciones</a>
+        </div>
+    </section>
+
+    <div class="productos-container">
+        <h1 class="productos-header">Nuestros Productos</h1>
+        
+        <div class="productos-grid">
+            {% for producto in productos %}
+            <div class="producto-card">
+                <div class="producto-imagen">
+                    <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="producto-img">
+                </div>
+                <div class="producto-info">
+                    <h3>{{ producto.nombre }}</h3>
+                    <p>{{ producto.descripcion }}</p>
+                    <div class="precio">${{ producto.precio }}</div>
+                    <div class="producto-acciones">
+                        <form method="post" action="{% url 'agregar_al_carrito' producto.id %}" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="producto-btn">
+                                Agregar
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

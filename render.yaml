@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: TiendaAlquimia
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn AlquimiaDeAlmas.wsgi"
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: AlquimiaDeAlmas.settings
+      - key: PYTHON_VERSION
+        value: 3.10
+      - key: SECRET_KEY
+        value: lucasyluzza2712
+      - key: DEBUG
+        value: False
+      - key: ALLOWED_HOSTS
+        value: mi-app-django.onrender.com

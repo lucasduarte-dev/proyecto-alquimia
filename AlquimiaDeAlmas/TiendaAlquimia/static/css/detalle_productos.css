@@ -1,0 +1,290 @@
+
+body {
+    background-color: #d1c4e9; 
+    color: #4a148c; 
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.7;
+    min-height: 100vh; 
+}
+
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+    color: #311b92; 
+}
+.cart-button {
+    display: inline-block;
+    visibility: visible;
+}
+
+.detalle-producto {
+    padding-top: 100px;
+    padding-bottom: 80px;
+    background-color: #d1c4e9; 
+}
+
+.detalle-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+    background: #ede7f6; /* Violeta claro */
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); /* Sombra elegante */
+    padding: 40px;
+}
+
+.imagen-container {
+    display: flex;
+    flex-direction: row; /* Alinea las miniaturas y la imagen principal en fila */
+    gap: 20px; /* Espaciado entre las miniaturas y la imagen principal */
+    align-items: flex-start;
+    flex: 1; /* La sección de imágenes ocupa el espacio restante */
+}
+
+.thumbnails {
+    display: flex;
+    flex-direction: column; /* Alinea las miniaturas en columna */
+    gap: 15px; /* Espaciado entre las miniaturas */
+}
+
+.thumbnail {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid #9575cd; /* Violeta intermedio */
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.thumbnail:hover {
+    transform: scale(1.08);
+    border-color: #5e35b1; /* Violeta profundo */
+}
+
+.main-image-container {
+    flex: 1; /* La imagen principal ocupa el espacio restante */
+    text-align: center;
+    background-color: #ede7f6; /* Violeta claro */
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+
+.main-image-container img {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 15px;
+}
+
+.info-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 25px;
+}
+
+.producto-nombre {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+    color: #4a148c; /* Violeta oscuro */
+}
+
+.producto-descripcion {
+    font-size: 1.2rem;
+    color: #5e35b1; /* Violeta profundo */
+    line-height: 1.8;
+}
+
+.producto-precio {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #4a148c; /* Violeta oscuro */
+}
+
+.producto-stock {
+    font-size: 1rem;
+    color: #7e57c2; /* Violeta intermedio claro */
+}
+
+.btn-comprar {
+    padding: 15px 40px;
+    background-color: #5e35b1; /* Violeta profundo */
+    color: white;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 12px;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-comprar:hover {
+    background-color: #311b92; /* Violeta profundo */
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra al pasar el mouse */
+}
+
+.cantidad-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.btn-cantidad {
+    padding: 10px 15px;
+    background-color: #9575cd; /* Violeta intermedio */
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-cantidad:hover {
+    background-color: #5e35b1; /* Violeta profundo */
+    transform: scale(1.1);
+}
+
+#cantidad {
+    width: 70px;
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 8px;
+    border: 1px solid #9575cd; /* Violeta intermedio */
+    border-radius: 8px;
+    background-color: #ede7f6; /* Violeta claro */
+    color: #4a148c; /* Violeta oscuro */
+}
+
+/* Productos relacionados */
+.productos-relacionados {
+    margin-top: 60px;
+    padding: 40px 0;
+    background-color: #d1c4e9; /* Violeta pastel */
+}
+
+.productos-titulo {
+    font-size: 2.2rem;
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 30px;
+    color: #4a148c; /* Violeta oscuro */
+}
+
+.carrusel-container {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center; /* Centra el carrusel horizontalmente */
+}
+
+.carrusel-track {
+    display: flex;
+    gap: 30px;
+    transition: transform 0.5s ease-in-out;
+    padding: 10px 0;
+    justify-content: center;
+}
+
+.carrusel-slide {
+    flex: 0 0 auto;
+    width: 220px;
+    display: flex;
+    justify-content: center; /* Centra el contenido de cada slide */
+    align-items: center;
+}
+
+.producto-card {
+    background-color: #ede7f6; /* Violeta claro */
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    transition: all 0.3s ease;
+    padding: 20px;
+    text-align: center;
+}
+
+.producto-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra al pasar el mouse */
+}
+
+.producto-imagen img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+.producto-detalles h3 {
+    font-size: 1.1rem;
+    font-family: 'Playfair Display', serif;
+    margin: 0;
+    color: #4a148c; /* Violeta oscuro */
+}
+
+.producto-detalles p {
+    font-size: 1rem;
+    color: #5e35b1; /* Violeta profundo */
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+/* Botones carrusel */
+.carrusel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra para los botones */
+}
+
+
+
+.carrusel-prev {
+    left: 10px;
+}
+
+.carrusel-next {
+    right: 10px;
+}
+.carrusel-control:hover {
+    background-color: #5e35b1; /* Violeta profundo */
+    transform: scale(1.1);
+}
+.carrusel-indicadores {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 10px; /* Espaciado entre los indicadores */
+}
+
+.indicador {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #ccc;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.indicador.active {
+    background-color: #4a148c; /* Violeta oscuro */
+}
+
+.indicador:hover {
+    background-color: #7e57c2; /* Violeta intermedio */
+}

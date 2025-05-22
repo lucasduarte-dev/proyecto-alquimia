@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>¡Gracias por tu compra!</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f8f8f8; padding: 20px;">
+    <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden;">
+        <tr>
+            <td style="background-color: #6e44ff; padding: 20px; text-align: center; color: #ffffff;">
+                <h1 style="margin: 0;">¡Gracias por tu compra, {{ user.username }}!</h1>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 20px;">
+                <p>Tu pedido ha sido procesado exitosamente y está en camino 🛍️</p>
+
+                <h2 style="color: #6e44ff;">Detalles del pedido:</h2>
+                <table width="100%" cellpadding="5" cellspacing="0" style="border-collapse: collapse;">
+                    <thead>
+                        <tr style="background-color: #f0f0f0;">
+                            <th align="left">Producto</th>
+                            <th align="center">Cantidad</th>
+                            <th align="right">Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in carrito %}
+                        <tr>
+                            <td>{{ item.nombre }}</td>
+                            <td align="center">{{ item.cantidad }}</td>
+                            <td align="right">${{ item.precio_formateado }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <h3 style="text-align: right; color: #333;">Total: ${{ total_formateado }}</h3>
+
+                <h2 style="color: #6e44ff;">Detalles del envío:</h2>
+                <p>
+                    <strong>Número de pedido:</strong> {{ order_id }}<br>
+                    <strong>Estado:</strong> {{ shipping_status|default:"Creado" }}<br>
+                    <strong>Dirección de envío:</strong> {{ shipping_address }}<br>
+                    <strong>Tipo de entrega:</strong> {{ delivery_type|default:"Entrega a domicilio" }}<br>
+                    {% if tracking_number %}
+                    <strong>Número de seguimiento:</strong> {{ tracking_number }}<br>
+                    {% endif %}
+                </p>
+
+                <h2 style="color: #6e44ff;">Coordiná tu envío</h2>
+                <p>Por favor, contactanos para coordinar los detalles del envío. Hacé clic en el botón de abajo para enviarnos un mensaje por WhatsApp.</p>
+
+                <div style="text-align: center; margin: 20px 0;">
+                    <a href="{{ link_whatsapp }}" style="background-color: #25D366; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 20px;">
+                        Coordinar envío por WhatsApp
+                    </a>
+                </div>
+
+                <p style="margin-top: 40px;">Gracias por confiar en <strong>Alquimia</strong>. Si tenés cualquier duda, no dudes en responder a este correo.</p>
+                <p style="color: #888;">Con cariño,</p>
+                <p><em>El equipo de Alquimia ✨</em></p>
+            </td>
+        </tr>
+        <tr>
+            <td style="background-color: #f0f0f0; text-align: center; padding: 10px; color: #888; font-size: 12px;">
+                © {{ current_year }} Alquimia. Todos los derechos reservados.
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
