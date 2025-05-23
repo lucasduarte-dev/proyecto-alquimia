@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'AlquimiaDeAlmas.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME':  os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'alquimia_db',
+        'USER': 'alquimia_db_user',
+        'PASSWORD': 'GkgrmynS3aJ9DwXmpFjurlnCxwse6i6Z',
+        'HOST': 'dpg-d0nli7euk2gs73c40b7g-a.oregon-postgres.render.com',
+        'PORT': '5432',
     }
 }
 
