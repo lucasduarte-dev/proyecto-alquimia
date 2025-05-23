@@ -11,25 +11,20 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-_#+%rmj#lw@hta4$9#kp#ljw*be86#!&#b5*z=0mf@fdqobu=1'
+SECRET_KEY = config('SECRET_KEY', default='django-insecure-_#+%rmj#lw@hta4$9#kp#ljw*be86#!&#b5*z=0mf@fdqobu=1')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -42,6 +37,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Para servir archivos estáticos en producción
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -55,7 +51,7 @@ ROOT_URLCONF = 'AlquimiaDeAlmas.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS':  [os.path.join(BASE_DIR, 'TiendaAlquimia', 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'TiendaAlquimia', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -70,25 +66,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'AlquimiaDeAlmas.wsgi.application'
 
-
 # Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'alquimia_db',
-        'USER': 'alquimia_db_user',
-        'PASSWORD': 'GkgrmynS3aJ9DwXmpFjurlnCxwse6i6Z',
-        'HOST': 'dpg-d0nli7euk2gs73c40b7g-a.oregon-postgres.render.com',
-        'PORT': '5432',
+        'NAME': config('DB_NAME', default='alquimia_db'),
+        'USER': config('DB_USER', default='alquimia_db_user'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST', default='localhost'),
+        'PORT': config('DB_PORT', default='5432'),
     }
 }
 
-
 # Password validation
-# https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -104,42 +94,58 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
-# https://docs.djangoproject.com/en/5.1/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
-
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'TiendaAlquimia', 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Para producción
+
+# Configuración de WhiteNoise para archivos estáticos
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Archivos de medios (imágenes, videos, etc.)
-MEDIA_URL = '/media/'  # URL base para acceder a archivos de medios
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Directorio donde se guardarán los archivos de medios
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 LOGIN_URL = 'login'
+
+# Email configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'tienda.alquimiadealmas@gmail.com'
-EMAIL_HOST_PASSWORD = 'uqfj chnj hkjp kvky'
-MERCADO_PAGO_PUBLIC_KEY = 'APP_USR-55cb1eec-335e-439b-a7c6-fd1055e92868'
-MERCADOPAGO_ACCESS_TOKEN = 'APP_USR-117926497947821-042019-ce117b8919da7cf61421d04b848b9ffb-2401603616'
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+
+# MercadoPago configuration
+MERCADO_PAGO_PUBLIC_KEY = config('MERCADO_PAGO_PUBLIC_KEY')
+MERCADOPAGO_ACCESS_TOKEN = config('MERCADOPAGO_ACCESS_TOKEN')
 
 # MiCorreo API configuration
 MICORREO_API_BASE_URL = "https://apitest.correoargentino.com.ar/micorreo/v1"
-MICORREO_API_USERNAME = 'Alquimia'
-MICORREO_API_PASSWORD = 'Inicial01+'
+MICORREO_API_USERNAME = config('MICORREO_API_USERNAME')
+MICORREO_API_PASSWORD = config('MICORREO_API_PASSWORD')
+
+# CSRF configuration
+CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS', default='').split(',') if config('CSRF_TRUSTED_ORIGINS', default='') else []
+
+# Security settings for production
+if not DEBUG:
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_REDIRECT_EXEMPT = []
+    SECURE_SSL_REDIRECT = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+
 # Configuración de Logging
 LOGGING = {
     'version': 1,
@@ -172,10 +178,4 @@ LOGGING = {
     },
 }
 
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['https://af9e-186-18-60-223.ngrok-free.app']
